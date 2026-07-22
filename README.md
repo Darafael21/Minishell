@@ -57,6 +57,12 @@ make fclean   # remove object files and binary
 make re       # fclean + all
 ```
 
+## Testing
+
+export
+env -i bash --norc --noprofile
+env -i ./minishell
+
 ## Features
 
 - Interactive prompt with command history (arrow keys)
