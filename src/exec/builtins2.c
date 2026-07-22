@@ -102,7 +102,8 @@ void	builtin_export(t_cmd *cmd, t_shell *shell)
 		sort_env_array(array, count_env_size(shell->env));
 		i = -1;
 		while (array[++i])
-			ft_putendl_fd(array[i], 1);
+			if (ft_strncmp(array[i] + 11, "_=", 2) != 0)
+				ft_putendl_fd(array[i], 1);
 		free_env_array(array);
 	}
 	else

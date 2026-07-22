@@ -121,6 +121,8 @@ extern volatile sig_atomic_t	g_signal;
 
 // env
 t_env	*init_env(char **envp);
+void	increment_shlvl(t_env **env);
+void	init_shell_vars(t_env **env);
 char	*get_env(t_env *lst, char *key);
 void	set_env(t_env **lst, char *key, char *value);
 void	remove_env(t_env **lst, char *key);
@@ -185,7 +187,6 @@ int		cont_event_hook(void);
 // utils
 void	append_hd_hist(t_shell *shell, char *line);
 void	update_hd_history(t_shell *shell);
-int		ft_strcmp(char *s1, char *s2);
 void	split_hd_input(char *line, t_shell *shell);
 char	*next_hd_line(t_shell *shell);
 char	*hd_readline(t_shell *shell);

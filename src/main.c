@@ -113,6 +113,8 @@ int	main(int ac, char **av, char **envp)
 	(void)ac;
 	(void)av;
 	shell.env = init_env(envp);
+	increment_shlvl(&shell.env);
+	init_shell_vars(&shell.env);
 	shell.exit_status = 0;
 	shell.running = 1;
 	shell.hd_hist = NULL;
