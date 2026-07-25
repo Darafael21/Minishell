@@ -12,27 +12,33 @@
 
 #include "../../inc/minishell.h"
 
-t_env	*init_env(char **envp)
+t_env   *init_env(char **envp)
 {
-	int		i;
-	char	*eq;
-	char	*key;
-	char	*value;
-	t_env	*head;
+    int     i;
+    char    *eq;
+    char    *key;
+    char    *value;
+    t_env   *head;
 
-	head = NULL;
-	i = 0;
-	while (envp[i])
-	{
-		eq = ft_strchr(envp[i], '=');
-		key = ft_substr(envp[i], 0, eq - envp[i]);
-		value = ft_strdup(eq + 1);
-		env_add_back(&head, new_env_node(key, value));
-		free(key);
-		free(value);
-		i++;
-	}
-	return (head);
+    head = NULL;
+    i = 0;
+    while (envp[i])
+    {
+        eq = ft_strchr(envp[i], '=');
+        if (!eq)
+        {
+            i++;
+            continue;
+        }
+        key = ft_substr(envp[i], 0, eq - envp[i]);
+        value = ft_strdup(eq + 1);
+        if (ft_strcmp(key, "_") != 0)
+            env_add_back(&head, new_env_node(key, value));
+        free(key);
+        free(value);
+        i++;
+    }
+    return (head);
 }
 
 void	increment_shlvl(t_env **env)
