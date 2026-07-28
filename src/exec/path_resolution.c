@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: darafael <darafael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/06 11:28:48 by toandrad          #+#    #+#             */
-/*   Updated: 2026/04/27 12:45:37 by toandrad         ###   ########.fr       */
+/*   Created: 2026/07/28 11:28:11 by darafael          #+#    #+#             */
+/*   Updated: 2026/07/28 11:28:11 by darafael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char	*resolve_path(char *command, t_env *lst)
 	}
 	path = get_env(lst, "PATH");
 	if (!path)
-		return (NULL);
+		path = "/usr/local/bin:/usr/bin:/bin";
 	paths = ft_split(path, ':');
 	return (search_in_paths(paths, command));
 }

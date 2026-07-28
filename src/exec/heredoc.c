@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: toandrad <toandrad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: darafael <darafael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/29 18:30:48 by toandrad          #+#    #+#             */
-/*   Updated: 2026/05/03 22:30:50 by toandrad         ###   ########.fr       */
+/*   Created: 2026/07/28 11:28:04 by darafael          #+#    #+#             */
+/*   Updated: 2026/07/28 13:38:37 by darafael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ static int	heredoc_interrupted(t_heredoc *hd, t_shell *shell)
 	dup2(hd->saved_stdin, STDIN_FILENO);
 	close(hd->saved_stdin);
 	tcsetattr(STDIN_FILENO, TCSANOW, &hd->saved_term);
+	rl_cleanup_after_signal();
 	rl_done = 0;
 	close(hd->fd[0]);
 	close(hd->fd[1]);
@@ -91,6 +92,7 @@ void	setup_heredoc_signals(void)
 {
 	struct sigaction	sa_int;
 	struct sigaction	sa_quit;
+	struct sigaction	sa_tstp;
 
 	sa_int.sa_handler = handle_heredoc_sigint;
 	sigemptyset(&sa_int.sa_mask);
@@ -100,4 +102,8 @@ void	setup_heredoc_signals(void)
 	sigemptyset(&sa_quit.sa_mask);
 	sa_quit.sa_flags = 0;
 	sigaction(SIGQUIT, &sa_quit, NULL);
+	sa_tstp.sa_handler = SIG_IGN;
+	sigemptyset(&sa_tstp.sa_mask);
+	sa_tstp.sa_flags = 0;
+	sigaction(SIGTSTP, &sa_tstp, NULL);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: toandrad <toandrad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: darafael <darafael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/13 14:47:01 by toandrad          #+#    #+#             */
-/*   Updated: 2026/05/13 19:37:21 by toandrad         ###   ########.fr       */
+/*   Created: 2026/07/28 11:28:28 by darafael          #+#    #+#             */
+/*   Updated: 2026/07/28 14:21:43 by darafael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	run_builtin(t_cmd *cmd, t_shell *shell, int builtin)
 	else if (builtin == 2)
 		builtin_cd(cmd, shell);
 	else if (builtin == 3)
-		builtin_pwd();
+		builtin_pwd(shell);
 	else if (builtin == 4)
 		builtin_export(cmd, shell);
 	else if (builtin == 5)

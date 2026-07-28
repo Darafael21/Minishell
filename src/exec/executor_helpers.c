@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: darafael <darafael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/08 11:46:02 by toandrad          #+#    #+#             */
-/*   Updated: 2026/06/01 11:12:21 by darafael         ###   ########.fr       */
+/*   Created: 2026/07/28 11:27:47 by darafael          #+#    #+#             */
+/*   Updated: 2026/07/28 14:21:43 by darafael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	dispatch_builtin(t_cmd *cmd, t_shell *shell, int builtin)
 	else if (builtin == 2)
 		builtin_cd(cmd, shell);
 	else if (builtin == 3)
-		builtin_pwd();
+		builtin_pwd(shell);
 	else if (builtin == 4)
 		builtin_export(cmd, shell);
 	else if (builtin == 5)

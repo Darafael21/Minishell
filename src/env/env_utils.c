@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: toandrad <toandrad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: darafael <darafael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/30 14:09:03 by toandrad          #+#    #+#             */
-/*   Updated: 2026/05/20 10:28:10 by toandrad         ###   ########.fr       */
+/*   Created: 2026/07/28 11:27:17 by darafael          #+#    #+#             */
+/*   Updated: 2026/07/28 11:27:19 by darafael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ t_env	*new_env_node(char *key, char *value)
 	if (!node)
 		return (NULL);
 	node->key = ft_strdup(key);
-	node->value = ft_strdup(value);
+	if (value)
+		node->value = ft_strdup(value);
+	else
+		node->value = NULL;
 	node->next = NULL;
 	return (node);
 }

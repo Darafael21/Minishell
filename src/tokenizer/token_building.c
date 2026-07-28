@@ -6,7 +6,7 @@
 /*   By: darafael <darafael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 11:19:04 by darafael          #+#    #+#             */
-/*   Updated: 2026/05/20 13:23:42 by darafael         ###   ########.fr       */
+/*   Updated: 2026/07/28 11:09:50 by darafael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ static int	fill_token_list(t_token **tokens, char **split, size_t i)
 
 	while (split[i])
 	{
+		if (split[i][0] == '#')
+			break ;
 		new_node = new_token(get_token_type(split[i]), split[i]);
 		if (!new_node)
 		{

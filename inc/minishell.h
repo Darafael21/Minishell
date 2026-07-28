@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: darafael <darafael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/08 12:54:08 by toandrad          #+#    #+#             */
-/*   Updated: 2026/06/01 13:59:41 by darafael         ###   ########.fr       */
+/*   Created: 2026/07/28 11:31:11 by darafael          #+#    #+#             */
+/*   Updated: 2026/07/28 14:21:43 by darafael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ int		apply_redirections(t_redir *lst, t_shell *shell);
 // builtins
 int		is_builtin(t_cmd *cmd);
 void	builtin_env(t_shell *shell);
-void	builtin_pwd(void);
+void	builtin_pwd(t_shell *shell);
 void	builtin_echo(t_cmd *cmd);
 void	builtin_exit(t_cmd *cmd, t_shell *shell);
 void	builtin_cd(t_cmd *cmd, t_shell *shell);
@@ -231,6 +231,8 @@ int		is_quoted_empty(char *str);
 void	compact_empty_args(char **argv, int *keep);
 char	*get_var(char *str, int *skip);
 char	*expand_var(char *str, int *i, t_shell *shell);
+char	*expand_brace_var(char *str, int *i, t_shell *shell);
+char	*expand_brace_default(char *str, int *i, char *val, int start);
 char	**expand_to_wordlist(char *str, t_shell *shell);
 int		expand_argv_count(t_cmd *cmd, t_shell *shell);
 int		wl_init(t_wlst *s);

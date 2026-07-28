@@ -6,7 +6,7 @@
 /*   By: darafael <darafael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/01 13:04:21 by darafael          #+#    #+#             */
-/*   Updated: 2026/06/01 13:52:22 by darafael         ###   ########.fr       */
+/*   Updated: 2026/07/28 11:36:26 by darafael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*append_cont_line(char *line, char *cont)
 {
 	char	*tmp;
 
-	tmp = ft_strjoin(line, " ");
+	tmp = ft_strjoin(line, "\n");
 	free(line);
 	line = ft_strjoin(tmp, cont);
 	free(tmp);

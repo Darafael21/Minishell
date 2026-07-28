@@ -3,14 +3,64 @@
 /*                                                        :::      ::::::::   */
 /*   env_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: toandrad <toandrad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: darafael <darafael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/26 11:51:55 by toandrad          #+#    #+#             */
-/*   Updated: 2026/05/20 10:27:47 by toandrad         ###   ########.fr       */
+/*   Created: 2026/07/28 11:27:08 by darafael          #+#    #+#             */
+/*   Updated: 2026/07/28 11:27:11 by darafael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
+
+static void	init_shlvl(t_env **head)
+{
+	char	*val;
+	int		lvl;
+	char	*new_val;
+
+	val = get_env(*head, "SHLVL");
+	lvl = 1;
+	if (val)
+		lvl = ft_atoi(val) + 1;
+	new_val = ft_itoa(lvl);
+	set_env(head, "SHLVL", new_val);
+	free(new_val);
+}
+
+static void	init_pwd(t_env **head)
+{
+	char	*pwd;
+
+	if (get_env(*head, "PWD"))
+		return ;
+	pwd = getcwd(NULL, 0);
+	if (pwd)
+	{
+		set_env(head, "PWD", pwd);
+		free(pwd);
+	}
+}
+
+static void	init_oldpwd(t_env **head)
+{
+	t_env	*cur;
+
+	cur = *head;
+	while (cur)
+	{
+		if (ft_strcmp(cur->key, "OLDPWD") == 0)
+			return ;
+		cur = cur->next;
+	}
+	env_add_back(head, new_env_node("OLDPWD", NULL));
+}
+
+static void	setup_default_env(t_env **head)
+{
+	init_shlvl(head);
+	init_pwd(head);
+	init_oldpwd(head);
+}
 
 t_env	*init_env(char **envp)
 {
@@ -27,11 +77,13 @@ t_env	*init_env(char **envp)
 		eq = ft_strchr(envp[i], '=');
 		key = ft_substr(envp[i], 0, eq - envp[i]);
 		value = ft_strdup(eq + 1);
-		env_add_back(&head, new_env_node(key, value));
+		if (ft_strcmp(key, "_") != 0)
+			env_add_back(&head, new_env_node(key, value));
 		free(key);
 		free(value);
 		i++;
 	}
+	setup_default_env(&head);
 	return (head);
 }
 

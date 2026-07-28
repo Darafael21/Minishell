@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: darafael <darafael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/03 19:34:44 by toandrad          #+#    #+#             */
-/*   Updated: 2026/06/01 13:30:20 by darafael         ###   ########.fr       */
+/*   Created: 2026/07/28 11:31:02 by darafael          #+#    #+#             */
+/*   Updated: 2026/07/28 11:31:04 by darafael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,5 @@ void	setup_cont_signals(void)
 	sigaction(SIGINT, &sa, NULL);
 	sa.sa_handler = SIG_IGN;
 	sigaction(SIGQUIT, &sa, NULL);
+	sigaction(SIGTSTP, &sa, NULL);
 }

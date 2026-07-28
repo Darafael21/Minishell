@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: toandrad <toandrad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: darafael <darafael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/08 14:32:00 by toandrad          #+#    #+#             */
-/*   Updated: 2026/05/13 19:27:58 by toandrad         ###   ########.fr       */
+/*   Created: 2026/07/28 11:27:41 by darafael          #+#    #+#             */
+/*   Updated: 2026/07/28 12:12:25 by darafael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ static void	export_var(char *arg, t_shell *shell)
 	{
 		if (!is_valid_identifier(arg))
 			print_export_err(arg, shell);
+		else if (!get_env(shell->env, arg))
+			env_add_back(&shell->env, new_env_node(arg, NULL));
 		return ;
 	}
 	key = ft_substr(arg, 0, eq - arg);

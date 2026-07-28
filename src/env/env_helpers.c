@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_helpers.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: toandrad <toandrad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: darafael <darafael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/26 13:22:45 by toandrad          #+#    #+#             */
-/*   Updated: 2026/05/12 20:48:01 by toandrad         ###   ########.fr       */
+/*   Created: 2026/07/28 11:26:54 by darafael          #+#    #+#             */
+/*   Updated: 2026/07/28 11:27:03 by darafael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,10 @@ char	**env_to_array(t_env *lst)
 	while (current)
 	{
 		tmp = ft_strjoin(current->key, "=");
-		result[i] = ft_strjoin(tmp, current->value);
+		if (current->value)
+			result[i] = ft_strjoin(tmp, current->value);
+		else
+			result[i] = ft_strdup(tmp);
 		free(tmp);
 		i++;
 		current = current->next;

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: darafael <darafael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/27 00:00:00 by darafael          #+#    #+#             */
-/*   Updated: 2026/06/01 13:27:14 by darafael         ###   ########.fr       */
+/*   Created: 2026/07/28 11:30:34 by darafael          #+#    #+#             */
+/*   Updated: 2026/07/28 13:38:37 by darafael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ void	process_hd_lines(t_shell *shell)
 
 void	process_input_line(char *line, t_shell *shell)
 {
-	char		*orig;
 	HIST_ENTRY	*old;
 
 	if (!isatty(STDIN_FILENO))
@@ -86,9 +85,8 @@ void	process_input_line(char *line, t_shell *shell)
 	shell->hd_cmd = line;
 	add_history(line);
 	shell->hd_hist_idx = history_length - 1;
-	orig = line;
 	handle_line(&line, shell);
-	if (line && line != orig)
+	if (line && !shell->hd_hist)
 	{
 		old = replace_history_entry(shell->hd_hist_idx, line, NULL);
 		if (old)

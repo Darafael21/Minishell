@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: darafael <darafael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/07 18:03:44 by darafael          #+#    #+#             */
-/*   Updated: 2026/06/01 11:01:11 by darafael         ###   ########.fr       */
+/*   Created: 2026/07/28 11:28:46 by darafael          #+#    #+#             */
+/*   Updated: 2026/07/28 14:09:40 by darafael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,28 +16,27 @@ char	*expand_var(char *str, int *i, t_shell *shell)
 {
 	char	*var_name;
 	char	*var_value;
-	char	*expanded;
 	int		skip;
 
 	if (str[*i + 1] == '?')
 		return ((*i) += 2, ft_itoa(shell->exit_status));
+	if (str[*i + 1] == '$')
+		return ((*i) += 2, ft_itoa((int)getpid()));
+	if (str[*i + 1] == '{')
+		return (expand_brace_var(str, i, shell));
+	if (str[*i + 1] == '"')
+		return ((*i)++, ft_strdup(""));
 	var_name = get_var(&str[*i + 1], &skip);
 	if (!var_name)
 		return (NULL);
 	if (skip == 0)
-	{
-		free(var_name);
-		(*i)++;
-		return (ft_strdup("$"));
-	}
+		return (free(var_name), (*i)++, ft_strdup("$"));
 	var_value = get_env(shell->env, var_name);
 	free(var_name);
-	if (var_value)
-		expanded = ft_strdup(var_value);
-	else
-		expanded = ft_strdup("");
 	*i += skip + 1;
-	return (expanded);
+	if (var_value)
+		return (ft_strdup(var_value));
+	return (ft_strdup(""));
 }
 
 static int	expand_args_strings(char **argv, int *keep, t_shell *shell)

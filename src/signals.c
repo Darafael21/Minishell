@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: darafael <darafael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/21 11:32:12 by toandrad          #+#    #+#             */
-/*   Updated: 2026/05/26 11:47:27 by darafael         ###   ########.fr       */
+/*   Created: 2026/07/28 11:30:54 by darafael          #+#    #+#             */
+/*   Updated: 2026/07/28 13:38:37 by darafael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	setup_signals(void)
 {
 	struct sigaction	sa_int;
 	struct sigaction	sa_quit;
+	struct sigaction	sa_tstp;
 
 	sa_int.sa_handler = handle_sigint;
 	sigemptyset(&sa_int.sa_mask);
@@ -43,6 +44,10 @@ void	setup_signals(void)
 	sigemptyset(&sa_quit.sa_mask);
 	sa_quit.sa_flags = 0;
 	sigaction(SIGQUIT, &sa_quit, NULL);
+	sa_tstp.sa_handler = SIG_IGN;
+	sigemptyset(&sa_tstp.sa_mask);
+	sa_tstp.sa_flags = 0;
+	sigaction(SIGTSTP, &sa_tstp, NULL);
 }
 
 void	reset_signals(void)
@@ -60,5 +65,6 @@ void	handle_heredoc_sigint(int sig)
 {
 	(void)sig;
 	g_signal = SIGINT;
+	write(1, "^C", 2);
 	close(STDIN_FILENO);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: toandrad <toandrad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: darafael <darafael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/17 11:31:36 by toandrad          #+#    #+#             */
-/*   Updated: 2026/05/13 19:26:46 by toandrad         ###   ########.fr       */
+/*   Created: 2026/07/28 11:27:29 by darafael          #+#    #+#             */
+/*   Updated: 2026/07/28 11:27:32 by darafael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,29 +78,29 @@ void	sort_env_array(char **array, int size)
 
 char	**env_to_declare_array(t_env *lst)
 {
-	t_env	*current;
-	int		env_size;
 	char	**res;
 	char	*tmp;
 	int		i;
 
-	env_size = count_env_size(lst);
-	res = malloc(sizeof(char *) * (env_size + 1));
+	res = malloc(sizeof(char *) * (count_env_size(lst) + 1));
 	i = 0;
-	current = lst;
-	while (current)
+	while (lst)
 	{
-		tmp = ft_strjoin("declare -x ", current->key);
-		res[i] = ft_strjoin(tmp, "=\"");
-		free(tmp);
-		tmp = ft_strjoin(res[i], current->value);
-		free(res[i]);
-		res[i] = ft_strjoin(tmp, "\"");
-		free(tmp);
-		i++;
-		current = current->next;
+		tmp = ft_strjoin("declare -x ", lst->key);
+		if (!lst->value)
+			res[i++] = tmp;
+		else
+		{
+			res[i] = ft_strjoin(tmp, "=\"");
+			free(tmp);
+			tmp = ft_strjoin(res[i], lst->value);
+			free(res[i]);
+			res[i++] = ft_strjoin(tmp, "\"");
+			free(tmp);
+		}
+		lst = lst->next;
 	}
-	res[env_size] = NULL;
+	res[i] = NULL;
 	return (res);
 }
 

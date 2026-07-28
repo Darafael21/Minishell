@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: darafael <darafael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/07 12:59:56 by toandrad          #+#    #+#             */
-/*   Updated: 2026/06/01 13:52:22 by darafael         ###   ########.fr       */
+/*   Created: 2026/07/28 11:27:35 by darafael          #+#    #+#             */
+/*   Updated: 2026/07/28 14:21:43 by darafael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,19 @@ void	builtin_env(t_shell *shell)
 	}
 }
 
-void	builtin_pwd(void)
+void	builtin_pwd(t_shell *shell)
 {
 	char	*pwd;
 
-	pwd = getcwd(NULL, 0);
-	if (!pwd)
+	pwd = get_env(shell->env, "PWD");
+	if (pwd)
 	{
-		perror("Getcwd");
+		ft_putendl_fd(pwd, 1);
 		return ;
 	}
+	pwd = getcwd(NULL, 0);
+	if (!pwd)
+		return (perror("Getcwd"));
 	ft_putendl_fd(pwd, 1);
 	free(pwd);
 }
