@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: darafael <darafael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/28 11:27:41 by darafael          #+#    #+#             */
-/*   Updated: 2026/07/28 12:12:25 by darafael         ###   ########.fr       */
+/*   Created: 2026/07/31 13:25:11 by darafael          #+#    #+#             */
+/*   Updated: 2026/07/31 13:25:13 by darafael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-static char	*get_cd_path(t_cmd *cmd, t_shell *shell)
+static char	*get_path(t_cmd *cmd, t_shell *shell)
 {
 	char	*path;
 
@@ -47,7 +47,7 @@ void	builtin_cd(t_cmd *cmd, t_shell *shell)
 	if (cmd->argv[1] && cmd->argv[2])
 		return (ft_putendl_fd("minishell: cd: too many arguments", 2),
 			shell->exit_status = 1, (void)0);
-	path = get_cd_path(cmd, shell);
+	path = get_path(cmd, shell);
 	if (!path)
 		return ;
 	oldpwd = getcwd(NULL, 0);
@@ -78,7 +78,7 @@ static void	export_var(char *arg, t_shell *shell)
 	{
 		if (!is_valid_identifier(arg))
 			print_export_err(arg, shell);
-		else if (!get_env(shell->env, arg))
+		else if (!env_dupp(shell->env, arg))
 			env_add_back(&shell->env, new_env_node(arg, NULL));
 		return ;
 	}

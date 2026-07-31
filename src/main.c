@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: darafael <darafael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/28 11:30:48 by darafael          #+#    #+#             */
-/*   Updated: 2026/07/28 11:30:50 by darafael         ###   ########.fr       */
+/*   Created: 2026/07/31 13:27:41 by darafael          #+#    #+#             */
+/*   Updated: 2026/07/31 13:27:43 by darafael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ static void	shell_run_loop(t_shell *shell)
 
 	rl_done = 0;
 	using_history();
-	line = readline("minishell$ ");
+	line = readline("$ ");
 	if (g_signal == SIGINT)
 	{
 		shell->exit_status = 130;
@@ -113,7 +113,6 @@ int	main(int ac, char **av, char **envp)
 	(void)ac;
 	(void)av;
 	shell.env = init_env(envp);
-	increment_shlvl(&shell.env);
 	init_shell_vars(&shell.env);
 	shell.exit_status = 0;
 	shell.running = 1;

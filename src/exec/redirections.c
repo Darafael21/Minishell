@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: darafael <darafael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/28 11:28:34 by darafael          #+#    #+#             */
-/*   Updated: 2026/07/28 11:28:34 by darafael         ###   ########.fr       */
+/*   Created: 2026/07/31 13:26:11 by darafael          #+#    #+#             */
+/*   Updated: 2026/07/31 13:26:11 by darafael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	open_and_redirect(char *filename, int flags, int target)
 
 	fd = open(filename, flags, 0644);
 	if (fd == -1)
-		return (perror(filename), -1);
+		return (ft_putstr_fd("minishell: ", 2), perror(filename), -1);
 	if (dup2(fd, target) == -1)
 	{
 		close(fd);

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: darafael <darafael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/28 11:31:02 by darafael          #+#    #+#             */
-/*   Updated: 2026/07/28 11:31:04 by darafael         ###   ########.fr       */
+/*   Created: 2026/07/31 13:27:52 by darafael          #+#    #+#             */
+/*   Updated: 2026/07/31 13:27:53 by darafael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	setup_wait_signals(void)
 	sigaction(SIGQUIT, &sa_quit, NULL);
 }
 
-void	handle_cont_sigint(int sig)
+static void	handle_cont_sigint(int sig)
 {
 	(void)sig;
 	g_signal = SIGINT;

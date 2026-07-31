@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: darafael <darafael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/28 11:27:47 by darafael          #+#    #+#             */
-/*   Updated: 2026/07/28 14:21:43 by darafael         ###   ########.fr       */
+/*   Created: 2026/07/31 13:25:16 by darafael          #+#    #+#             */
+/*   Updated: 2026/07/31 13:39:39 by darafael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,11 @@ void	wait_child(pid_t pid, t_shell *shell)
 	if (WIFEXITED(status))
 		shell->exit_status = WEXITSTATUS(status);
 	else if (WIFSIGNALED(status))
+	{
+		if (WTERMSIG(status) == SIGQUIT)
+			write(1, "Quit (core dumped)\n", 19);
 		shell->exit_status = 128 + WTERMSIG(status);
+	}
 }
 
 void	child_execute(t_cmd *cmd, char *path, t_shell *shell)

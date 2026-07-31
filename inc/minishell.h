@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: darafael <darafael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/28 11:31:11 by darafael          #+#    #+#             */
-/*   Updated: 2026/07/28 14:21:43 by darafael         ###   ########.fr       */
+/*   Created: 2026/07/31 13:24:24 by darafael          #+#    #+#             */
+/*   Updated: 2026/07/31 13:41:04 by darafael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ t_env	*init_env(char **envp);
 void	increment_shlvl(t_env **env);
 void	init_shell_vars(t_env **env);
 char	*get_env(t_env *lst, char *key);
+int		env_dupp(t_env *lst, char *key);
 void	set_env(t_env **lst, char *key, char *value);
 void	remove_env(t_env **lst, char *key);
 char	**env_to_array(t_env *lst);
@@ -171,6 +172,7 @@ void	close_prepared_heredocs(t_cmd *cmd);
 // pipes
 int		count_cmds(t_cmd *cmd);
 void	free_pipes(int **pipes, int count);
+void	wait_one_child(pid_t pid, int is_last, t_shell *shell);
 void	close_pipe_fds(int **pipes, int count);
 void	execute_pipeline(t_cmd *cmd, t_shell *shell);
 

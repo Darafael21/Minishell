@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: darafael <darafael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/28 11:30:54 by darafael          #+#    #+#             */
-/*   Updated: 2026/07/28 13:38:37 by darafael         ###   ########.fr       */
+/*   Created: 2026/07/31 13:27:47 by darafael          #+#    #+#             */
+/*   Updated: 2026/07/31 13:27:48 by darafael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 volatile sig_atomic_t	g_signal;
 
-void	handle_sigint(int sig)
+static void	handle_sigint(int sig)
 {
 	(void)sig;
 	g_signal = SIGINT;
@@ -24,7 +24,7 @@ void	handle_sigint(int sig)
 	rl_redisplay();
 }
 
-void	handle_sigquit(int sig)
+static void	handle_sigquit(int sig)
 {
 	(void)sig;
 	g_signal = SIGQUIT;

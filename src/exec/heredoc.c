@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: darafael <darafael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/28 11:28:04 by darafael          #+#    #+#             */
-/*   Updated: 2026/07/28 13:38:37 by darafael         ###   ########.fr       */
+/*   Created: 2026/07/31 13:25:31 by darafael          #+#    #+#             */
+/*   Updated: 2026/07/31 13:25:32 by darafael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	heredoc_interrupted(t_heredoc *hd, t_shell *shell)
 	close(hd->saved_stdin);
 	tcsetattr(STDIN_FILENO, TCSANOW, &hd->saved_term);
 	rl_cleanup_after_signal();
-	rl_done = 0;
+	write(1, "\033[A\033[2K", 7);
 	close(hd->fd[0]);
 	close(hd->fd[1]);
 	shell->exit_status = 130;

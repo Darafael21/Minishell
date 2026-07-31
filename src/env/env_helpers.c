@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: darafael <darafael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/28 11:26:54 by darafael          #+#    #+#             */
-/*   Updated: 2026/07/28 15:03:57 by darafael         ###   ########.fr       */
+/*   Created: 2026/07/31 13:24:36 by darafael          #+#    #+#             */
+/*   Updated: 2026/07/31 13:24:38 by darafael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,17 @@ void	set_env(t_env **lst, char *key, char *value)
 	}
 	if (!found)
 		env_add_back(lst, new_env_node(key, value));
+}
+
+int	env_dupp(t_env *lst, char *key)
+{
+	while (lst)
+	{
+		if (ft_strcmp(lst->key, key) == 0)
+			return (1);
+		lst = lst->next;
+	}
+	return (0);
 }
 
 void	remove_env(t_env **lst, char *key)
