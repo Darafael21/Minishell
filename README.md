@@ -228,7 +228,8 @@ echo $?     # should print 2
 - [Advanced Programming in the UNIX Environment — W. Richard Stevens](https://www.apuebook.com/)
 - [POSIX Shell Command Language](https://pubs.opengroup.org/onlinepubs/9799919799/utilities/V3_chap02.html)
 - [Linux errno Reference](https://www.chromium.org/chromium-os/developer-library/reference/linux-constants/errnos/)
-- `man` pages: `fork(2)`, `execve(2)`, `pipe(2)`, `dup2(2)`, `waitpid(2)`, `signal(7)`, `sigaction(2)`, `readline(3)`
+- [Stack Overflow](https://stackoverflow.com/)
+- All functions `man` pages
 
 ## Use of AI
 

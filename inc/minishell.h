@@ -100,23 +100,6 @@ typedef struct s_shell
 	int		hd_hist_idx;
 }	t_shell;
 
-typedef struct s_es
-{
-	char	*result;
-	int		sq;
-	int		dq;
-}	t_es;
-
-typedef struct s_wlst
-{
-	char	**words;
-	char	*cur;
-	int		n;
-	int		sq;
-	int		dq;
-	int		ws;
-}	t_wlst;
-
 extern volatile sig_atomic_t	g_signal;
 
 // env
@@ -235,13 +218,6 @@ char	*get_var(char *str, int *skip);
 char	*expand_var(char *str, int *i, t_shell *shell);
 char	*expand_brace_var(char *str, int *i, t_shell *shell);
 char	*expand_brace_default(char *str, int *i, char *val, int start);
-char	**expand_to_wordlist(char *str, t_shell *shell);
-int		expand_argv_count(t_cmd *cmd, t_shell *shell);
-int		wl_init(t_wlst *s);
-char	*wl_append(char *s, char c);
-int		wl_add(t_wlst *s);
-int		wl_dollar(char *str, int *i, t_wlst *s, t_shell *shell);
-
 // parser
 t_redir	*new_redir(t_redir_type type, char *filename, int quoted);
 void	redir_add_back(t_redir **head, t_redir *node);
