@@ -6,7 +6,7 @@
 /*   By: darafael <darafael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/31 13:24:24 by darafael          #+#    #+#             */
-/*   Updated: 2026/07/31 13:41:04 by darafael         ###   ########.fr       */
+/*   Updated: 2026/08/04 08:56:31 by darafael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ extern volatile sig_atomic_t	g_signal;
 
 // env
 t_env	*init_env(char **envp);
-void	increment_shlvl(t_env **env);
 void	init_shell_vars(t_env **env);
 char	*get_env(t_env *lst, char *key);
 int		env_dupp(t_env *lst, char *key);
